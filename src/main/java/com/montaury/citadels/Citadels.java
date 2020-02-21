@@ -40,8 +40,7 @@ public class Citadels {
         for (int joueurs = 0; joueurs < nbP; joueurs += 1) {
             Player player = new Player("Computer " + joueurs, 35, new City(board), new ComputerController());
             player.computer = true;
-            players = players.append(player
-            );
+            players = players.append(player);
         }
         CardPile pioche = new CardPile(Card.all().toList().shuffle());
         players.forEach(player -> {
@@ -286,7 +285,8 @@ public class Citadels {
                                     }
                                     }
                                 else if (actionType1 == "Destroy district") {
-                                    // flemme...
+                                    /*Character characterToDestroyDistrict = group.player().controller.selectAmong(List.of(Character.MAGICIAN, Character.KING, Character.BISHOP, Character.THIEF, Character.MERCHANT, Character.ARCHITECT, Character.ASSASSIN));
+                                    groups.associationToCharacter(characterToDestroyDistrict).peek(Group::)*/
                                 }
                                     else if (actionType1 == "Rob") {
                                     Character character = group.player().controller.selectAmong(List.of(Character.MAGICIAN, Character.KING, Character.BISHOP, Character.MERCHANT, Character.ARCHITECT, Character.WARLORD)

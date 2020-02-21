@@ -8,16 +8,17 @@ import org.junit.Test;
 public class CityTest {
     City city;
     Board board;
+    Possession possession;
 
     @Before
     public void setUp() {
         board = new Board();
         city = new City(board);
+        possession = new Possession(0, null);
     }
 
     @Test
     public void construction_made() {
-        Possession possession = new Possession(0, null); // 0 ou donc 0 score
         city.buildDistrict(Card.MANOR_5); // score +3
         city.buildDistrict(Card.WATCHTOWER_2); // +1 score
         city.buildDistrict(Card.TAVERN_5); // +1 score
@@ -27,7 +28,6 @@ public class CityTest {
 
     @Test
     public void first_player_with_completed_city() {
-        Possession possession = new Possession(0, null); // 0 or donc 0 score
         city.buildDistrict(Card.WATCHTOWER_2); // +1 score
         city.buildDistrict(Card.MANOR_5); // +3 score
         city.buildDistrict(Card.TRADING_POST_1); // +2 score
@@ -40,8 +40,15 @@ public class CityTest {
     }
 
     @Test
+    public void give_bonus_points_for_dragon_gate() {
+        city.buildDistrict(Card.DRAGON_GATE); // + 8 score
+        city.buildDistrict(Card.HARBOR_2); // + 4 score
+        int score = city.score(possession);
+        Assertions.assertThat(score).isEqualTo(12); // 4 points pour harbor mais aussi les 8 points de la Merveille
+    }
+
+    @Test
     public void give_bonus_points_for_all_types_districts() {
-        Possession possession = new Possession(0, null);
         city.buildDistrict(Card.PALACE_3); // +5,NOBLE
         city.buildDistrict(Card.BATTLEFIELD_2); // +3,MILITARY
         city.buildDistrict(Card.DOCKS_3); // +3,TRADE
@@ -54,7 +61,6 @@ public class CityTest {
     @Test
     public void second_player_with_completed_city() {
         City city2 = new City(board);
-        Possession possession = new Possession(0, null); // 0 or donc 0 score
         city.buildDistrict(Card.WATCHTOWER_2); // +1 score
         city.buildDistrict(Card.MANOR_5); // +3 score
         city.buildDistrict(Card.TRADING_POST_1); // +2 score
