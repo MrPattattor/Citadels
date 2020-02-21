@@ -42,11 +42,11 @@ public class CityTest {
     }
 
     @Test
-    public void give_bonus_points_for_dragon_gate() {
+    public void give_bonus_points_for_dragon_gate_or_university() {
         city.buildDistrict(Card.DRAGON_GATE); // + 8 score
-        city.buildDistrict(Card.HARBOR_2); // + 4 score
+        city.buildDistrict(Card.UNIVERSITY); // + 8 score
         int score = city.score(possession);
-        Assertions.assertThat(score).isEqualTo(12); // 4 points pour harbor mais aussi les 8 points de la Merveille -> 12 au total
+        Assertions.assertThat(score).isEqualTo(16); // Capcité des deux Merveilles -> 16 au total
     }
 
     @Test
