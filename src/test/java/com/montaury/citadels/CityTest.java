@@ -44,7 +44,15 @@ public class CityTest {
         city.buildDistrict(Card.DRAGON_GATE); // + 8 score
         city.buildDistrict(Card.HARBOR_2); // + 4 score
         int score = city.score(possession);
-        Assertions.assertThat(score).isEqualTo(12); // 4 points pour harbor mais aussi les 8 points de la Merveille
+        Assertions.assertThat(score).isEqualTo(12); // 4 points pour harbor mais aussi les 8 points de la Merveille -> 12 au total
+    }
+
+    @Test
+    public void give_bonus_points_for_each_gold_with_treasury() {
+        Possession possessionGold = new Possession(4, null);
+        city.buildDistrict(Card.TREASURY); // + 5 scor + 1 pour chaque pièce d'or possédée par le joueur
+        int score = city.score(possessionGold);
+        Assertions.assertThat(score).isEqualTo(9); // 5 + Le joueur possède 4 pièces d'or donc il aura 4 points grâce à la Merveille -> 9 au total
     }
 
     @Test
