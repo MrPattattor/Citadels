@@ -285,8 +285,7 @@ public class Citadels {
                                     }
                                     }
                                 else if (actionType1 == "Destroy district") {
-                                    /*Character characterToDestroyDistrict = group.player().controller.selectAmong(List.of(Character.MAGICIAN, Character.KING, Character.BISHOP, Character.THIEF, Character.MERCHANT, Character.ARCHITECT, Character.ASSASSIN));
-                                    groups.associationToCharacter(characterToDestroyDistrict).peek(Group::)*/
+                                    //flemme ...
                                 }
                                     else if (actionType1 == "Rob") {
                                     Character character = group.player().controller.selectAmong(List.of(Character.MAGICIAN, Character.KING, Character.BISHOP, Character.MERCHANT, Character.ARCHITECT, Character.WARLORD)

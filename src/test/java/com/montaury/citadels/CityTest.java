@@ -1,9 +1,11 @@
 package com.montaury.citadels;
 
 import com.montaury.citadels.district.Card;
+import com.montaury.citadels.player.Player;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
+import io.vavr.collection.HashSet;
 
 public class CityTest {
     City city;
@@ -50,18 +52,26 @@ public class CityTest {
     @Test
     public void give_bonus_points_for_each_gold_with_treasury() {
         Possession possessionGold = new Possession(4, null);
-        city.buildDistrict(Card.TREASURY); // + 5 scor + 1 pour chaque pièce d'or possédée par le joueur
+        city.buildDistrict(Card.TREASURY); // + 5 score + 1 pour chaque pièce d'or possédée par le joueur
         int score = city.score(possessionGold);
         Assertions.assertThat(score).isEqualTo(9); // 5 + Le joueur possède 4 pièces d'or donc il aura 4 points grâce à la Merveille -> 9 au total
     }
 
     @Test
+    public void give_bonus_points_for_each_card_with_map_room() {
+        city.buildDistrict(Card.MAP_ROOM);
+        Possession possessionCard = new Possession(0, HashSet.of(Card.BATTLEFIELD_1, Card.DOCKS_2, Card.MONASTERY_3));
+        int score = city.score(possessionCard);
+        Assertions.assertThat(score).isEqualTo(8); // 5 points pour la possession de la Merveille + 3 points par rapport aux cartes possédées -> 8 au total
+    }
+
+    @Test
     public void give_bonus_points_for_all_types_districts() {
-        city.buildDistrict(Card.PALACE_3); // +5,NOBLE
-        city.buildDistrict(Card.BATTLEFIELD_2); // +3,MILITARY
-        city.buildDistrict(Card.DOCKS_3); // +3,TRADE
-        city.buildDistrict(Card.CHURCH_3); // +2,RELIGIOUS
-        city.buildDistrict(Card.KEEP_1); // +3,SPECIAL
+        city.buildDistrict(Card.PALACE_3); // +5 NOBLE
+        city.buildDistrict(Card.BATTLEFIELD_2); // +3 MILITARY
+        city.buildDistrict(Card.DOCKS_3); // +3 TRADE
+        city.buildDistrict(Card.CHURCH_3); // +2 RELIGIOUS
+        city.buildDistrict(Card.KEEP_1); // +3 SPECIAL
         int score = city.score(possession);
         Assertions.assertThat(score).isEqualTo(19); // Normalement : 16 + Bonus 5 types : 3 points -> 19 au total
     }
