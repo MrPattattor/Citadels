@@ -35,7 +35,7 @@ public class Citadels {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Hello! Quel est votre nom ? ");
-        String playerName = (scanner.next()).concat(" " + scanner.next());
+        String playerName = scanner.nextLine();
         System.out.println("Quel est votre age ? ");
         int playerAge = scanner.nextInt();
         Board board = new Board();
@@ -46,8 +46,8 @@ public class Citadels {
         int nbP;
         do {
             nbP = scanner.nextInt();
-        } while (nbP < 2 || nbP > 8);
-        for (int joueurs = 0; joueurs < nbP; joueurs += 1) {
+        } while (nbP < 2 || nbP >= 8);
+        for (int joueurs = 1; joueurs <= nbP - 1; joueurs += 1) {
             Player player = new Player("Computer " + joueurs, 35, new City(board), new ComputerController());
             player.computer = true;
             players = players.append(player);
