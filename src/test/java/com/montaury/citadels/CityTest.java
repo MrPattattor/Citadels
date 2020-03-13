@@ -21,6 +21,7 @@ public class CityTest {
 
     @Test
     public void construction_made() {
+        City city = new City(board);
         city.buildDistrict(Card.MANOR_5); // score +3
         city.buildDistrict(Card.WATCHTOWER_2); // +1 score
         city.buildDistrict(Card.TAVERN_5); // +1 score

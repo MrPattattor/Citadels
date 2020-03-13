@@ -18,6 +18,7 @@ import io.vavr.collection.Set;
 
 import java.util.Collections;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 public class Citadels {
     static final String DRAW_TWO_CARDS_AND_KEEP_ONE ="Draw 2 cards and keep 1";
@@ -34,7 +35,7 @@ public class Citadels {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Hello! Quel est votre nom ? ");
-        String playerName = scanner.next();
+        String playerName = (scanner.next()).concat(" " + scanner.next());
         System.out.println("Quel est votre age ? ");
         int playerAge = scanner.nextInt();
         Board board = new Board();
@@ -100,7 +101,9 @@ public class Citadels {
             for (int iii = 0; iii < 8; iii++) {
                 for (int ii = 0; ii < associations.size(); ii++) {
                     if (iii + 1 == associations.get(ii).character.number()) {
-                        if (associations.get(ii).isMurdered()) {}else{
+                        if (associations.get(ii).isMurdered()) {}
+                        else
+                        {
                             Group group = associations.get(ii);
                             associations.get(ii).thief().peek(thief -> thief.steal(group.player()));
                             Set<String> baseActions = HashSet.of(DRAW_TWO_CARDS_AND_KEEP_ONE, RECEIVE_TWO_COINS);
@@ -294,8 +297,7 @@ public class Citadels {
                                     }
                                     }
                                 else if (actionType1.equals(DESTROY_DISTRICT)) {
-                                    //flemme ...
-                                    // me too bro
+
                                 }
                                     else if (actionType1.equals("Rob")) {
                                     Character character = group.player().controller.selectAmong(List.of(Character.MAGICIAN, Character.KING, Character.BISHOP, Character.MERCHANT, Character.ARCHITECT, Character.WARLORD)
@@ -306,7 +308,7 @@ public class Citadels {
                                 actionType11 = actionType1;
                                 availableActions11 = availableActions11.remove(actionType11);
                             }
-                            while (!availableActions11.isEmpty() && actionType11 != "End round");
+                            while (!availableActions11.isEmpty() && !actionType11.equals("End round"));
                         }
                     }
                 }
