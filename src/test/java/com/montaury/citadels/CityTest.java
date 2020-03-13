@@ -12,24 +12,24 @@ import org.junit.Test;
 
 import java.util.Optional;
 
-public class CityTest {
+public class Citytest {
     @Test
-    public  void  test_Cout_Construction() {
+    public  void  test_cout_construction() {
         Board board =  new  Board ();
-        City ville =  new  City(board);
-        Possession possession =  new  Possession ( 0 , null ); // 0 ou donc 0 score
-        ville.buildDistrict (Card.MANOR_5); // score +3
-        ville.buildDistrict (Card.WATCHTOWER_2); // +1 score
-        ville.buildDistrict (Card.TAVERN_5 ); // +1 score
-        int score = ville.score (possession);
+        City city =  new  City(board);
+        Possession possession =  new  Possession ( 0 , null );
+        city.buildDistrict (Card.MANOR_5); // score +3
+        city.buildDistrict (Card.WATCHTOWER_2); // +1 score
+        city.buildDistrict (Card.TAVERN_5 ); // +1 score
+        int score = city.score (possession);
         Assertions.assertThat (score).isEqualTo(5);
     }
 
     @Test
-    public void test_first_player(){
+    public void test_first_player_build7district(){
         Board board = new Board();
         City city = new City(board);
-        Possession possession = new Possession(0,null); // 0 or donc 0 score
+        Possession possession = new Possession(0,null);
         city.buildDistrict(Card.WATCHTOWER_2); // +1 score
         city.buildDistrict(Card.MANOR_5); // +3 score
         city.buildDistrict(Card.TRADING_POST_1); // +2 score
