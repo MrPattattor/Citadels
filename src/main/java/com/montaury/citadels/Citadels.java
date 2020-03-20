@@ -11,10 +11,9 @@ import com.montaury.citadels.player.Player;
 import com.montaury.citadels.round.GameRoundAssociations;
 import com.montaury.citadels.round.Group;
 import com.montaury.citadels.round.action.DestroyDistrictAction;
+import com.montaury.citadels.district.DestructibleDistrict;
 import io.vavr.Tuple;
-import io.vavr.collection.HashSet;
-import io.vavr.collection.List;
-import io.vavr.collection.Set;
+import io.vavr.collection.*;
 
 import java.util.Collections;
 import java.util.Scanner;
@@ -297,7 +296,16 @@ public class Citadels {
                                     }
                                     }
                                 else if (actionType1.equals(DESTROY_DISTRICT)) {
+                                    //TDD
+                                    //1ère étape : Choisir un joueur parmi les différents joueurs à qui l'on veut détruire un quartier
+                                    Player playerToDestroyADistrictFrom = group.player().controller.selectPlayerAmong(groups.associations.map(Group::player).remove(group.player()));
 
+                                    //2ème étape : On réalise une Map des joueurs avec leurs districts des districts
+                                    Map<Player, List<DestructibleDistrict>> distroyableDistricts = (Map<Player, List<DestructibleDistrict>>) new HashMap<Player, List<DestructibleDistrict>>();
+
+                                    //3ème étape : On choisit le quartier à détruire et on le détruit
+                                    distroyableDistricts.put(playerToDestroyADistrictFrom, playerToDestroyADistrictFrom.city().districtsDestructibleBy(group.player()));
+                                    DestructibleDistrict districtToDestroy =  group.player().controller.selectDistrictToDestroyAmong(distroyableDistricts);
                                 }
                                     else if (actionType1.equals("Rob")) {
                                     Character character = group.player().controller.selectAmong(List.of(Character.MAGICIAN, Character.KING, Character.BISHOP, Character.MERCHANT, Character.ARCHITECT, Character.WARLORD)
